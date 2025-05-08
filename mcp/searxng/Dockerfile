@@ -21,6 +21,9 @@ WORKDIR /app
 # Clone SearXNG
 RUN git clone https://github.com/searxng/searxng.git .
 
+# Install required dependencies first
+RUN pip3 install --no-cache-dir pyyaml requests babel flask flask-babel lxml pygments python-dateutil simplejson httpx pyopenssl certifi uvloop httptools
+
 # Install SearXNG and dependencies
 RUN pip3 install --no-cache-dir -e .
 

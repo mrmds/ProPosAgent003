@@ -1,0 +1,40 @@
+server:
+  port: 8888
+  bind_address: "127.0.0.1"
+  secret_key: "change_me"  # Please change this in production
+
+search:
+  safe_search: 1  # Filter results
+  autocomplete: "duckduckgo"
+  default_lang: "all"
+  formats:
+    - html
+    - json
+  
+ui:
+  static_path: "/app/searx/static"
+  templates_path: "/app/searx/templates"
+  default_theme: "simple"
+  default_locale: "en"
+  
+engines:
+  - name: google
+    engine: google
+    shortcut: g
+    disabled: false
+  - name: duckduckgo
+    engine: duckduckgo
+    shortcut: ddg
+    disabled: false
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: w
+    disabled: false
+  - name: bing
+    engine: bing
+    shortcut: b
+    disabled: false
+
+# Custom settings for MCP integration
+mcp:
+  enabled: true

@@ -30,4 +30,4 @@ pandas>=2.0.0
 streamlit>=1.22.0
 
 # MCP Integration
-mcp-client>=0.3.0
+mcp-client>=0.2.0

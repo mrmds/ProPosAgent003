@@ -5,6 +5,7 @@ Streamlit interface for the Generic Agent with Supabase, Ollama and A2A protocol
 import os
 import asyncio
 import streamlit as st
+import requests
 from generic_agent import run_generic_agent
 from a2a_protocol import A2AProtocol, AgentInfo
 import dotenv
@@ -66,11 +67,32 @@ st.subheader("Interact with a versatile agent powered by Supabase, Ollama, and A
 with st.sidebar:
     st.header("Configuration")
     
+    # Get available Ollama models
+    def get_ollama_models():
+        try:
+            ollama_base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+            response = requests.get(f"{ollama_base_url}/api/tags")
+            if response.status_code == 200:
+                models_data = response.json().get("models", [])
+                # Extract model names
+                models = [model["name"] for model in models_data]
+                # Add fallback models in case the API is unavailable
+                if not models:
+                    return ["llama2", "codellama", "mistral", "gemma", "deepseek"]
+                return models
+            else:
+                st.warning(f"Could not fetch Ollama models. Status code: {response.status_code}")
+                return ["llama2", "codellama", "mistral", "gemma", "deepseek"]
+        except Exception as e:
+            st.warning(f"Error fetching Ollama models: {str(e)}")
+            return ["llama2", "codellama", "mistral", "gemma", "deepseek"]
+
     # Model selection
+    available_models = get_ollama_models()
     model = st.selectbox(
         "Ollama Model",
-        ["llama2", "codellama", "mistral", "gemma", "deepseek"],
-        index=0
+        available_models,
+        index=0 if available_models else 0
     )
     
     # Table selection

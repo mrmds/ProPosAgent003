@@ -20,7 +20,13 @@ docker build -t mcp-searxng:latest -f Dockerfile .
 Run the container:
 
 ```bash
-docker run -p 8080:8080 mcp-searxng:latest
+docker run -p 8080:8080 --name searxng01 searxng01
+```
+
+If port 8080 is already in use, you can map to a different port:
+
+```bash
+docker run -p 8081:8080 --name searxng01 searxng01
 ```
 
 ## MCP Configuration

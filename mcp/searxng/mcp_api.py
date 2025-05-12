@@ -167,7 +167,8 @@ async def list_tools():
             },
             "is_streaming": False,
             "auth_required": False,
-            "rate_limited": False
+            "rate_limited": False,
+            "auth_type": "none"
         }
     ]
 

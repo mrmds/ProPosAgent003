@@ -44,7 +44,7 @@ class ExecutionRequest(BaseModel):
 
 # Create FastAPI app
 app = FastAPI(
-    title="SearXNG MCP",
+    title="searxng01",
     description="MCP-compatible API for SearXNG search engine",
     version="1.0.0"
 )
@@ -112,7 +112,7 @@ async def perform_search(execution_id: str, parameters: ToolParameters):
 @app.get("/")
 async def root():
     return {
-        "name": "SearXNG MCP",
+        "name": "searxng01",
         "description": "MCP-compatible API for SearXNG search engine",
         "version": "1.0.0"
     }
